@@ -1,0 +1,26 @@
+{
+  "skill_name": "human-tone",
+  "note": "触发测试:should_trigger=产出面向人阅读的散文,应自动去味;should_not=纯代码/数据/机械变换或琐碎任务,不该触发(近似陷阱)。用 skill-creator 的 run_eval.py / run_loop.py 或 claude -p 实测命中率。",
+  "evals": [
+    { "query": "帮我写一篇关于远程办公效率的微信公众号文章,600字左右", "should_trigger": true },
+    { "query": "写个小红书文案,种草一款能多设备同步的笔记app,带点emoji和标签", "should_trigger": true },
+    { "query": "给我做一个关于 Q3 增长复盘的 PPT 大纲,8 页左右,每页要点写出来", "should_trigger": true },
+    { "query": "draft a cold outreach email to a VP of Engineering introducing our observability tool", "should_trigger": true },
+    { "query": "write a product announcement blog post for our new offline-first sync feature", "should_trigger": true },
+    { "query": "把这段产品介绍改得更吸引人一点:'我们的工具帮助团队协作'", "should_trigger": true },
+    { "query": "帮我写一段公司官网首页的 hero 文案,主打'让 AI 记住你的工作'", "should_trigger": true },
+    { "query": "写一篇 LinkedIn 帖子,分享我从传统 IT 转做 AI 落地的三点体会", "should_trigger": true },
+    { "query": "give me a 150-word abstract for a talk on multilingual de-slopping of LLM text", "should_trigger": true },
+    { "query": "帮我把这封辞职信润色一下,语气诚恳但别太肉麻", "should_trigger": true },
+    { "query": "写个 Python 函数,把一个嵌套 dict 扁平化成点号路径的 key", "should_trigger": false },
+    { "query": "这段 SQL 为什么报错 near 'GROUP':select name,count(*) from t group name", "should_trigger": false },
+    { "query": "帮我把这个 CSV 里第 3 列和第 5 列的乘积算出来加一列", "should_trigger": false },
+    { "query": "我的 React 组件 re-render 太频繁,帮我定位下原因", "should_trigger": false },
+    { "query": "把这句英文逐字直译成中文,我要对照学语法:The cat sat on the mat", "should_trigger": false },
+    { "query": "3 的 17 次方等于多少", "should_trigger": false },
+    { "query": "把这个 markdown 表格按第二列数值从大到小排序,只要排好的表", "should_trigger": false },
+    { "query": "git 怎么把最近三个 commit 合成一个", "should_trigger": false },
+    { "query": "帮我把这份会议纪要压缩成 5 条 bullet,自己内部存档看的", "should_trigger": false },
+    { "query": "这个正则 /^\\d{3}-\\d{4}$/ 匹配什么,给我几个例子", "should_trigger": false }
+  ]
+}

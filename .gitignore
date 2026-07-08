@@ -1,0 +1,16 @@
+# macOS
+.DS_Store
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# skill 运行时产物
+outputs/
+*.tmp
+
+# 编辑器
+.vscode/
+.idea/
+*.swp

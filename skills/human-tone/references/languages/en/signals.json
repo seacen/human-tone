@@ -1,0 +1,70 @@
+{
+  "lang": "en",
+  "displayName": "English",
+  "detect": {
+    "latinRatioMin": 0.4,
+    "functionWords": ["the ", " and ", " of ", " to ", " is ", " that ", " with ", " for "]
+  },
+  "signals": [
+    {
+      "id": "MP-01",
+      "label": "Evaluative inflation",
+      "regex": "\\b(crucial|vital|essential|pivotal|invaluable|game[- ]?changer|cutting[- ]?edge|state[- ]of[- ]the[- ]art|world[- ]class|unparalleled|groundbreaking)\\b",
+      "flags": "gi"
+    },
+    {
+      "id": "MP-02",
+      "label": "Mechanical antithesis",
+      "regex": "\\bnot (just|merely|only|simply)\\b[^.?!]{0,60}\\bbut\\b",
+      "flags": "gi"
+    },
+    {
+      "id": "MP-04",
+      "label": "Narrator scaffolding",
+      "regex": "\\b(it'?s (important|worth) (to note|noting)|it should be noted|let'?s (dive|explore|take a look)|as we can see|keep in mind that)\\b",
+      "flags": "gi"
+    },
+    {
+      "id": "MP-06",
+      "label": "Verbal false limbs",
+      "regex": "\\b(make|reach|provide|conduct|perform|give|take|carry out)\\s+(a|an|the)?\\s*\\w*(tion|ment|sion|ance|ence|sis)\\b",
+      "flags": "gi"
+    },
+    {
+      "id": "MP-08",
+      "label": "Bookend boilerplate",
+      "regex": "\\b(in (today'?s|this|an) (fast[- ]?paced|ever[- ]?(changing|evolving)|digital|modern) (world|age|landscape|era)|in conclusion|at the end of the day|when it comes to)\\b",
+      "flags": "gi"
+    },
+    {
+      "id": "MP-11",
+      "label": "Pretentious diction",
+      "regex": "\\b(delve|tapestry|testament|underscore|leverage|utilize|seamless|realm|embark|harness|elevate|showcase|foster|myriad|plethora|unleash)\\b",
+      "flags": "gi"
+    },
+    {
+      "id": "MP-09",
+      "label": "Unwarranted absolutes",
+      "regex": "\\b(undoubtedly|without a doubt|unquestionably|every single|bar none|hands down|guaranteed to)\\b",
+      "flags": "gi"
+    },
+    {
+      "id": "MP-12",
+      "label": "Dead metaphor & reified abstraction",
+      "regex": "\\b(take[s]? root|grow[s]? into|blossom[s]? into|hold[s]? space for|prop[s]? up|plant the seeds of|a growing body of|move (the|a) needle|low[- ]hanging fruit|circle back|boil the ocean)\\b",
+      "flags": "gi"
+    },
+    {
+      "id": "MP-16",
+      "label": "Empty category shell",
+      "regex": "\\b(the whole \\w+ thing|as a concept|the (notion|idea) of|the world of \\w+)\\b",
+      "flags": "gi"
+    },
+    {
+      "id": "MP-14",
+      "label": "Staccato triad (short one-word sentences for drama)",
+      "regex": "([A-Z][a-z]+\\.)\\s+([A-Z][a-z]+\\.)\\s+([A-Z][a-z]+\\.)",
+      "flags": "g"
+    }
+  ]
+}
