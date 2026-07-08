@@ -21,47 +21,33 @@ AI flavor has two layers, so the criteria do — this is what lets one ruleset c
 
 Write a criterion once, every language benefits; keep the word lists apart. **Adding a language is dropping a folder** under `languages/` (`pack.md` + `minimal.md` + `signals.json`); the universal layer doesn't change. Protocol: [`references/languages/README.md`](skills/human-tone/references/languages/README.md).
 
-## Two ways to use it
+## Install
 
-### 1. Both (recommended) — make your writing self-de-flavor
-
-If you want the human-tone skill installed **and** the rules standing in your agents so writing gets cleaned automatically, run one command straight from the internet — no clone:
+One command, no clone — installs it on every agent you have (Claude Code, Codex, Cursor, Windsurf, Cline, Aider, and the Chinese agents Qoder, Trae, CodeBuddy):
 
 ```
-# preview (detect your agents, change nothing)
-curl -fsSL https://raw.githubusercontent.com/seacen/human-tone/main/install.mjs | node --input-type=module -
-# apply
-curl -fsSL https://raw.githubusercontent.com/seacen/human-tone/main/install.mjs | node --input-type=module - --write
+npx github:seacen/human-tone
 ```
 
-(Equivalent: `npx github:seacen/human-tone --write`.)
+It does two things: **(1)** installs the human-tone skill on each agent, and **(2)** writes a one-line *reference* to that rule file into each agent's config (`@` reference, never inlined) so the rules stand in context every turn — your writing gets de-flavored automatically. It takes effect right away.
 
-It does two things: **(1)** `npx skills add` installs the skill on every agent, and **(2)** writes a one-line *reference* to the skill's rule file into each agent's config (`@` reference, never inlined). The rules then sit in context every turn.
+> Why standing rules: a model won't invoke a finishing-pass skill for prose it writes itself. Keeping the rules standing in the config is what makes de-flavoring happen automatically.
 
-> Why standing rules: a model won't invoke a finishing-pass skill for prose it writes itself (near 0% on content tasks, on any agent). Standing rules are the portable way to make de-flavoring automatic.
-
-### 2. The skill only — deep clean on demand
-
-If you just want the skill and will invoke it yourself:
-
-```
-npx skills add seacen/human-tone
-```
-
-Then, in an agent with a skills system (Claude Code, Codex, Cursor…), invoke `human-tone` when you want a thorough clean — a six-step, high-precision pass.
+Just want the skill to invoke yourself? `npx skills add seacen/human-tone`, then call `human-tone` in your agent for a six-step deep clean.
 
 ## Install options
 
-Every run previews first, backs up each file (`*.human-tone.bak`), and is idempotent:
+Every run backs up each touched file (`*.human-tone.bak`), is idempotent, and is reversible:
 
 ```
---scope global|project|both   # default: global
---lang zh|en|both             # default: both
---agents claude,codex         # limit to specific agents
---uninstall --write           # remove everything it added
+npx github:seacen/human-tone --dry-run              # preview only, change nothing
+npx github:seacen/human-tone --uninstall            # remove everything it added
+npx github:seacen/human-tone --scope project        # install into the current project (default: global)
+npx github:seacen/human-tone --lang zh              # install one language's rules (default: both)
+npx github:seacen/human-tone --agents claude,codex  # limit to specific agents
 ```
 
-Append these to the command above (with curl, after the `- `, e.g. `… | node --input-type=module - --write --lang zh`). Requires Node (`npx skills` needs it anyway; one Node script runs on macOS and Windows).
+Requires Node (`npx` needs it anyway; one script runs on macOS and Windows).
 
 ## Layout
 

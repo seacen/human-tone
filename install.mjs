@@ -17,20 +17,15 @@
 // Why Node: `npx skills` already requires Node, and one Node script runs on macOS and Windows
 // alike (a shell script or .bat cannot). Zero dependencies — built-in modules only.
 //
-// Run it straight from the internet, no clone:
-//   curl -fsSL https://raw.githubusercontent.com/seacen/human-tone/main/install.mjs | node --input-type=module -            # dry-run
-//   curl -fsSL https://raw.githubusercontent.com/seacen/human-tone/main/install.mjs | node --input-type=module - --write    # apply
-//   npx github:seacen/human-tone --write     # same, via npx (append any flags below)
+// One command, no clone — installs the skill on every agent AND adds the always-on rules:
+//   npx github:seacen/human-tone
 //
-// Or with the repo checked out:
-//   node install.mjs                 # dry-run: detect agents, print the plan
-//   node install.mjs --write         # apply
-//   node install.mjs --scope project|global|both   # default: global
-//   node install.mjs --lang zh|en|both              # default: both
-//   node install.mjs --agents claude,codex          # limit to specific agents
-//   node install.mjs --source seacen/human-tone     # skill source for `npx skills add`
-//   node install.mjs --skip-skill                   # only write config references
-//   node install.mjs --uninstall --write            # remove the managed reference block
+//   npx github:seacen/human-tone --dry-run    # preview only: detect agents, print the plan, change nothing
+//   npx github:seacen/human-tone --uninstall  # remove everything it added
+//   flags: --scope project|global|both (default global) · --lang zh|en|both (default both)
+//          · --agents claude,codex (limit) · --source owner/repo (skill source) · --skip-skill
+//
+// Equivalents: `curl -fsSL <raw>/install.mjs | node --input-type=module -`, or `node install.mjs` in a clone.
 import { readFileSync, writeFileSync, existsSync, mkdirSync, copyFileSync } from 'node:fs';
 import { execSync } from 'node:child_process';
 import { homedir } from 'node:os';
@@ -46,7 +41,7 @@ const skillRef = (lang) => norm(join(HOME, '.agents', 'skills', 'human-tone', 'r
 const A = process.argv.slice(2);
 const has = (f) => A.includes(f);
 const val = (f, d) => { const i = A.indexOf(f); return i >= 0 && A[i + 1] && !A[i + 1].startsWith('--') ? A[i + 1] : d; };
-const WRITE = has('--write'), UNINSTALL = has('--uninstall'), SKIP_SKILL = has('--skip-skill');
+const DRY = has('--dry-run') || has('-n'), UNINSTALL = has('--uninstall'), SKIP_SKILL = has('--skip-skill');
 const SCOPE = val('--scope', 'global'), LANG = val('--lang', 'both'), ONLY = val('--agents', 'auto');
 const SOURCE = val('--source', 'seacen/human-tone'), PROJECT_DIR = val('--project-dir', process.cwd());
 const tilde = (p) => p.startsWith('~') ? join(HOME, p.slice(1)) : p;
@@ -138,13 +133,13 @@ function backupAndWrite(file, content) {
 const wanted = ONLY === 'auto' ? null : new Set(ONLY.split(',').map((s) => s.trim()));
 const detected = AGENTS.filter((a) => (wanted ? wanted.has(a.id) : a.detect()));
 const scopes = SCOPE === 'both' ? ['global', 'project'] : [SCOPE];
-console.log(`human-tone installer — ${UNINSTALL ? 'UNINSTALL' : 'install'} · scope=${SCOPE} · lang=${LANG} · ${WRITE ? 'APPLYING' : 'DRY-RUN (add --write to apply)'}`);
+console.log(`human-tone installer — ${UNINSTALL ? 'UNINSTALL' : 'install'} · scope=${SCOPE} · lang=${LANG} · ${DRY ? 'DRY-RUN — preview only (drop --dry-run to install)' : 'INSTALLING'}`);
 console.log(`detected: ${detected.filter((a) => a.id !== 'agents').map((a) => a.name).join(', ') || '(none)'}\n`);
 
 if (!UNINSTALL && !SKIP_SKILL) {
   const cmd = `npx skills add ${SOURCE} --all${SCOPE === 'project' ? '' : ' -g'}`;
   console.log(`[1/2] install the skill on every agent (delegated to npx skills):\n      ${cmd}`);
-  if (WRITE) { try { execSync(cmd, { stdio: 'inherit' }); } catch { console.log(`      ! auto-run failed (needs network / may prompt). Run it once by hand: ${cmd}`); } }
+  if (!DRY) { try { execSync(cmd, { stdio: 'inherit' }); } catch { console.log(`      ! auto-run failed (needs network / may prompt). Run it once by hand: ${cmd}`); } }
   else console.log('      (dry-run: not executed)');
   console.log('');
 }
@@ -162,6 +157,6 @@ for (const a of detected) for (const scope of scopes) {
 }
 
 if (!changes.length) { console.log('\nNothing to change in configs.'); process.exit(0); }
-if (!WRITE) { console.log(`\nThat's the plan. Re-run with --write to apply. References point at ${skillRef('<lang>')} (placed by npx skills add).`); process.exit(0); }
+if (DRY) { console.log(`\nThat's the plan (preview). Drop --dry-run to install. References point at ${skillRef('<lang>')} (placed by npx skills add).`); process.exit(0); }
 for (const c of changes) { backupAndWrite(c.file, c.after); console.log(`  ✔ ${c.file}`); }
-console.log(`\nDone. Touched files were backed up to *.human-tone.bak. Undo: node install.mjs --uninstall --write --scope ${SCOPE}`);
+console.log(`\nDone. Touched files were backed up to *.human-tone.bak. Undo: npx github:seacen/human-tone --uninstall${SCOPE === 'global' ? '' : ` --scope ${SCOPE}`}`);
