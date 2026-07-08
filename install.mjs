@@ -136,7 +136,7 @@ console.log(`human-tone installer — ${UNINSTALL ? 'UNINSTALL' : 'install'} · 
 console.log(`detected: ${detected.filter((a) => a.id !== 'agents').map((a) => a.name).join(', ') || '(none)'}\n`);
 
 if (!UNINSTALL && !SKIP_SKILL) {
-  const cmd = `npx skills add ${SOURCE}`;
+  const cmd = `npx skills add ${SOURCE} --all${SCOPE === 'project' ? '' : ' -g'}`;
   console.log(`[1/2] install the skill on every agent (delegated to npx skills):\n      ${cmd}`);
   if (WRITE) { try { execSync(cmd, { stdio: 'inherit' }); } catch { console.log(`      ! auto-run failed (needs network / may prompt). Run it once by hand: ${cmd}`); } }
   else console.log('      (dry-run: not executed)');
