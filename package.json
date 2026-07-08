@@ -1,0 +1,18 @@
+{
+  "name": "human-tone",
+  "version": "1.0.0",
+  "description": "Strip AI flavor from writing, across agents — installer for the human-tone skill (npx skills add) + always-on rule references.",
+  "type": "module",
+  "bin": {
+    "human-tone": "install.mjs"
+  },
+  "files": [
+    "install.mjs"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/seacen/human-tone",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seacen/human-tone.git"
+  }
+}

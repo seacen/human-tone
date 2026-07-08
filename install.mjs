@@ -17,6 +17,12 @@
 // Why Node: `npx skills` already requires Node, and one Node script runs on macOS and Windows
 // alike (a shell script or .bat cannot). Zero dependencies — built-in modules only.
 //
+// Run it straight from the internet, no clone:
+//   curl -fsSL https://raw.githubusercontent.com/seacen/human-tone/main/install.mjs | node --input-type=module -            # dry-run
+//   curl -fsSL https://raw.githubusercontent.com/seacen/human-tone/main/install.mjs | node --input-type=module - --write    # apply
+//   npx github:seacen/human-tone --write     # same, via npx (append any flags below)
+//
+// Or with the repo checked out:
 //   node install.mjs                 # dry-run: detect agents, print the plan
 //   node install.mjs --write         # apply
 //   node install.mjs --scope project|global|both   # default: global

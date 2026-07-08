@@ -25,12 +25,16 @@ Write a criterion once, every language benefits; keep the word lists apart. **Ad
 
 ### 1. Both (recommended) — make your writing self-de-flavor
 
-If you want the human-tone skill installed **and** the rules standing in your agents so writing gets cleaned automatically, use the installer:
+If you want the human-tone skill installed **and** the rules standing in your agents so writing gets cleaned automatically, run one command straight from the internet — no clone:
 
 ```
-node install.mjs           # detect your agents, preview only, change nothing
-node install.mjs --write   # apply
+# preview (detect your agents, change nothing)
+curl -fsSL https://raw.githubusercontent.com/seacen/human-tone/main/install.mjs | node --input-type=module -
+# apply
+curl -fsSL https://raw.githubusercontent.com/seacen/human-tone/main/install.mjs | node --input-type=module - --write
 ```
+
+(Equivalent: `npx github:seacen/human-tone --write`.)
 
 It does two things: **(1)** `npx skills add` installs the skill on every agent, and **(2)** writes a one-line *reference* to the skill's rule file into each agent's config (`@` reference, never inlined). The rules then sit in context every turn.
 
@@ -51,13 +55,13 @@ Then, in an agent with a skills system (Claude Code, Codex, Cursor…), invoke `
 Every run previews first, backs up each file (`*.human-tone.bak`), and is idempotent:
 
 ```
-node install.mjs --scope global|project|both   # default: global
-node install.mjs --lang zh|en|both             # default: both
-node install.mjs --agents claude,codex         # limit to specific agents
-node install.mjs --uninstall --write           # remove everything it added
+--scope global|project|both   # default: global
+--lang zh|en|both             # default: both
+--agents claude,codex         # limit to specific agents
+--uninstall --write           # remove everything it added
 ```
 
-Requires Node (`npx skills` needs it anyway; one Node script runs on macOS and Windows).
+Append these to the command above (with curl, after the `- `, e.g. `… | node --input-type=module - --write --lang zh`). Requires Node (`npx skills` needs it anyway; one Node script runs on macOS and Windows).
 
 ## Layout
 
