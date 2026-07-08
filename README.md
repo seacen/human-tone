@@ -1,17 +1,20 @@
 <div align="center">
-
 <!-- 预留 logo 位置 -->
+</div>
 
 # human-tone · 去 AI 味
+
+> **把 AI 写的文字改回像人写的。** 去掉 AI 腔、翻译腔、套话,但不动你真正要表达的——事实、数字、术语,还有作者的语气。中英文都地道,也能扩到任何语言。
+>
+> **Make AI-written text read like a person wrote it.** Strip the AI tone, translationese, and boilerplate while keeping what you meant — facts, numbers, terms, the author's voice. Native in Chinese and English, ready for any language.
+
+**🌐 Language:** **中文（本页）** · [**English**](README.en.md)
 
 [![version](https://img.shields.io/badge/version-1.0.0-2ea44f)](https://github.com/seacen/human-tone/releases)
 &nbsp;[![license](https://img.shields.io/github/license/seacen/human-tone?color=blue)](LICENSE)
 &nbsp;![works with](https://img.shields.io/badge/works_with-any_agent-8A2BE2)
-&nbsp;[![English](https://img.shields.io/badge/README-English-informational)](README.en.md)
 
-</div>
-
-把 AI 写的文字改回像人写的:去掉 AI 腔、商务黑话、翻译腔、机械对仗、套话,但不动你真正要表达的东西——事实、数字、术语、引文,还有作者本人的语气。内置中文和英文,也能扩展到任何语言,每门语言按自己的规矩来。
+---
 
 ## 为什么用 human-tone
 

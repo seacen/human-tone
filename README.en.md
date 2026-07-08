@@ -1,17 +1,20 @@
 <div align="center">
-
 <!-- logo goes here -->
+</div>
 
 # human-tone
+
+> **Make AI-written text read like a person wrote it.** Strip the AI tone, translationese, and boilerplate while keeping what you meant — facts, numbers, terms, the author's voice. Native in Chinese and English, ready for any language.
+>
+> **把 AI 写的文字改回像人写的。** 去掉 AI 腔、翻译腔、套话,但不动你真正要表达的——事实、数字、术语,还有作者的语气。中英文都地道,也能扩到任何语言。
+
+**🌐 Language:** [**中文**](README.md) · **English (this page)**
 
 [![version](https://img.shields.io/badge/version-1.0.0-2ea44f)](https://github.com/seacen/human-tone/releases)
 &nbsp;[![license](https://img.shields.io/github/license/seacen/human-tone?color=blue)](LICENSE)
 &nbsp;![works with](https://img.shields.io/badge/works_with-any_agent-8A2BE2)
-&nbsp;[![中文](https://img.shields.io/badge/README-%E4%B8%AD%E6%96%87-informational)](README.md)
 
-</div>
-
-Make AI-written text read like a person wrote it: strip the AI tone, corporate jargon, translationese, mechanical antithesis, and boilerplate — but leave what you actually meant untouched: facts, numbers, terms, quotes, and the author's own voice. Ships with Chinese and English, and extends to any language, each on its own terms.
+---
 
 ## Why human-tone
 
