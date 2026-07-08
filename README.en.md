@@ -1,61 +1,73 @@
-# human-tone — strip AI flavor from writing
+<div align="center">
 
-[中文](README.md)
+<!-- logo goes here -->
 
-Make AI-written text read like a person wrote it — remove the AI tells (evaluative inflation, corporate jargon, translationese, mechanical antithesis, boilerplate) **without touching a single thing you meant**: facts, numbers, terms, quotes, the author's voice. Chinese and English are first-class; the framework extends to any language.
+# human-tone
 
-## Why human-tone
+[![version](https://img.shields.io/badge/version-1.0.0-2ea44f)](https://github.com/seacen/human-tone/releases)
+&nbsp;[![license](https://img.shields.io/github/license/seacen/human-tone?color=blue)](LICENSE)
+&nbsp;![works with](https://img.shields.io/badge/works_with-any_agent-8A2BE2)
+&nbsp;[![中文](https://img.shields.io/badge/README-%E4%B8%AD%E6%96%87-informational)](README.md)
 
-Most de-AI-flavor tools either **just swap words** (ban "delve" and the model reaches for "explore" — a synonym gives it away) or **over-edit** (they shave off legal fixed phrases and a real author's deliberate parallelism). human-tone is different:
+</div>
 
-- **Targets the pattern, not a word list** — 16 cross-language "mother patterns" (evaluative inflation, mechanical antithesis, translationese…) with variants sealed.
-- **Precision first, zero collateral** — a precision spine (register gating, object disambiguation, density thresholds, a whitelist); when unsure, it leaves the text alone. Across 4 real rewrites in the evals, precision damage was 0.
-- **Every agent, out of the box** — one command installs it into Claude Code, Codex, Cursor, Windsurf, Cline, Aider, and the Chinese agents Qoder, Trae, CodeBuddy.
+Make AI-written text read like a person wrote it: strip the AI tone, corporate jargon, translationese, mechanical antithesis, and boilerplate — but leave what you actually meant untouched: facts, numbers, terms, quotes, and the author's own voice. Ships with Chinese and English, and extends to any language, each on its own terms.
 
-## The core: universal layer + language packs (two layers)
+## Why it's better
 
-AI flavor has two layers, so the criteria do — this is what lets one ruleset cover many languages and makes adding a language a zero-code change:
+Most de-AI-flavor tools go wrong one of two ways. Some **only swap words**: ban "delve" and the model reaches for "explore" — one synonym and the tell is back. Others **cut too much**: they strip a legal document's fixed phrasing or an author's deliberate refrain along with the slop. human-tone works differently:
 
-- **Universal layer** (`skills/human-tone/references/*.md`): the *shape* of each defect, how to judge it, the control flow. The mother patterns come from the generation process, recur across languages, are written once, and hold no specific-language words.
-- **Language packs** (`skills/human-tone/references/languages/<code>/`): how those defects surface in one language — its word lists, register bands, whitelist, calque table. One folder per language.
+- **It goes after the pattern, not a word list.** It watches for 16 recurring cross-language patterns (evaluative inflation, mechanical antithesis, translationese, and so on) and catches every variant, so a synonym can't slip past.
+- **It would rather miss than misfire.** It reads the register first: a legal "shall be processed", an academic "we conducted an analysis", an author's intentional refrain — all left alone. Whether a word goes depends on whether its neighbors pile up and whether cutting it loses meaning. When unsure, it leaves the text.
+- **It has sources.** The subtractive method comes from Orwell's *Politics and the English Language* (with Strunk & White's *The Elements of Style*); the Chinese translationese rules from Yu Guangzhong's *On Improving Europeanized Chinese* (with Si Guo's books on translation); which kinds of writing may be edited — a legal brief versus a chatty post — comes from Biber's and Halliday's work on register.
+- **What's left still reads human.** If a pass flattens the piece — every sentence the same length, the voice sanded off — that counts as damage and it rolls back. After rewriting, it rescans for leftovers — a script re-checks the patterns a model's memory would miss — and reconciles every fact against the original, so nothing is dropped or invented.
+- **It sidesteps the traps others fall into.** It doesn't play writing teacher (only a "when not to touch" guardrail remains), and doesn't cut blindly — some tools delete every adverb or ban every dash, and add fresh AI tells doing it.
+- **It's tested.** It ships two sample sets: one of things that should be cleaned, to measure how much it catches; one where not a single character should move, to measure whether it misfires.
 
-Write a criterion once, every language benefits; keep the word lists apart. **Adding a language is dropping a folder** under `languages/` (`pack.md` + `minimal.md` + `signals.json`); the universal layer doesn't change. Protocol: [`references/languages/README.md`](skills/human-tone/references/languages/README.md).
+## Two layers: universal rules + language packs
+
+AI flavor comes in two layers, so the rules do too — adding a language changes not one line of the core logic.
+
+- **The universal layer** — the defects every language shares, and the standard for deciding whether to cut (things like evaluative inflation and mechanical antithesis). These come with the way models generate text and recur whatever the language, so they're written once and hold no words from any specific language.
+- **A language pack** — how one of those defects actually shows up in a given language: its common AI words, which kinds of writing count as normal, which terms are off-limits, its translationese table. One folder per language.
+
+Write the standard once and every language uses it; the specific words stay in each pack. **Adding a language is dropping a folder** into `languages/` (with `pack.md`, `minimal.md`, `signals.json`); the universal layer stays put. See the [language-pack protocol](skills/human-tone/references/languages/README.md).
 
 ## Install
 
-One command, no clone — installs it on every agent you have (Claude Code, Codex, Cursor, Windsurf, Cline, Aider, and the Chinese agents Qoder, Trae, CodeBuddy):
+One command, no clone — it installs onto every agent you have (Claude Code, Codex, Cursor, Windsurf, Cline, Aider, and the Chinese agents Qoder, Trae, CodeBuddy):
 
 ```
 npx github:seacen/human-tone
 ```
 
-It does two things: **(1)** installs the human-tone skill on each agent, and **(2)** writes a one-line *reference* to that rule file into each agent's config (`@` reference, never inlined) so the rules stand in context every turn — your writing gets de-flavored automatically. It takes effect right away.
+It does two things: it installs the human-tone skill on each of your agents, then writes one line into each agent's config that references those rules (a reference, not the pasted text). The rules stay in context, so your writing gets cleaned as you go. It takes effect right away.
 
-> Why standing rules: a model won't invoke a finishing-pass skill for prose it writes itself. Keeping the rules standing in the config is what makes de-flavoring happen automatically.
+> Why keep the rules always loaded: a skill only runs when the model thinks to invoke it, and for prose it can already write, it won't. Put the rules in the config and the cleaning happens on its own.
 
-Just want the skill to invoke yourself? `npx skills add seacen/human-tone`, then call `human-tone` in your agent for a six-step deep clean.
+Just want the skill and will call it yourself? Run `npx skills add seacen/human-tone`, then invoke `human-tone` in your agent for a full deep clean.
 
 ## Install options
 
-Every run backs up each touched file (`*.human-tone.bak`), is idempotent, and is reversible:
+Every touched file is backed up (`*.human-tone.bak`), reruns don't double-write, and it all reverses:
 
 ```
-npx github:seacen/human-tone --dry-run              # preview only, change nothing
-npx github:seacen/human-tone --uninstall            # remove everything it added
-npx github:seacen/human-tone --scope project        # install into the current project (default: global)
+npx github:seacen/human-tone --dry-run              # show what would change, touch nothing
+npx github:seacen/human-tone --uninstall            # remove all of it
+npx github:seacen/human-tone --scope project        # install into the current project, not globally (default: global)
 npx github:seacen/human-tone --lang zh              # install one language's rules (default: both)
 npx github:seacen/human-tone --agents claude,codex  # limit to specific agents
 ```
 
-Requires Node (`npx` needs it anyway; one script runs on macOS and Windows).
+Needs Node (`npx` relies on it anyway; one script runs on both macOS and Windows).
 
 ## Layout
 
 ```
-skills/human-tone/    the skill: SKILL.md + references/ (universal layer + languages/ packs) + scripts/
-install.mjs           cross-agent installer
-evals/                rubric, comparison design, test cases
-docs/DESIGN.md        design doc
+skills/human-tone/   the skill: SKILL.md + references/ (universal layer + languages/ packs) + scripts/
+install.mjs          cross-agent installer
+evals/               rubric, comparison design, test samples
+docs/DESIGN.md       design notes
 ```
 
 ## License
