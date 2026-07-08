@@ -13,18 +13,19 @@
 
 Make AI-written text read like a person wrote it: strip the AI tone, corporate jargon, translationese, mechanical antithesis, and boilerplate — but leave what you actually meant untouched: facts, numbers, terms, quotes, and the author's own voice. Ships with Chinese and English, and extends to any language, each on its own terms.
 
-## Why it's better
+## Why human-tone
 
 Most de-AI-flavor tools go wrong one of two ways. Some **only swap words**: ban "delve" and the model reaches for "explore" — one synonym and the tell is back. Others **cut too much**: they strip a legal document's fixed phrasing or an author's deliberate refrain along with the slop. human-tone works differently:
 
 - **It goes after the pattern, not a word list.** It watches for 16 recurring cross-language patterns (evaluative inflation, mechanical antithesis, translationese, and so on) and catches every variant, so a synonym can't slip past.
+- **Native in Chinese and English, and ready for any language.** Chinese translationese and the English GPT tone each get handled on their own terms; supporting a new language is just adding a folder — the core rules don't change. Most tools only watch English; human-tone was built for many languages from the start.
 - **It would rather miss than misfire.** It reads the register first: a legal "shall be processed", an academic "we conducted an analysis", an author's intentional refrain — all left alone. Whether a word goes depends on whether its neighbors pile up and whether cutting it loses meaning. When unsure, it leaves the text.
 - **It has sources.** The subtractive method comes from Orwell's *Politics and the English Language* (with Strunk & White's *The Elements of Style*); the Chinese translationese rules from Yu Guangzhong's *On Improving Europeanized Chinese* (with Si Guo's books on translation); which kinds of writing may be edited — a legal brief versus a chatty post — comes from Biber's and Halliday's work on register.
 - **What's left still reads human.** If a pass flattens the piece — every sentence the same length, the voice sanded off — that counts as damage and it rolls back. After rewriting, it rescans for leftovers — a script re-checks the patterns a model's memory would miss — and reconciles every fact against the original, so nothing is dropped or invented.
 - **It sidesteps the traps others fall into.** It doesn't play writing teacher (only a "when not to touch" guardrail remains), and doesn't cut blindly — some tools delete every adverb or ban every dash, and add fresh AI tells doing it.
 - **It's tested.** It ships two sample sets: one of things that should be cleaned, to measure how much it catches; one where not a single character should move, to measure whether it misfires.
 
-## Two layers: universal rules + language packs
+## How it works: universal rules + language packs
 
 AI flavor comes in two layers, so the rules do too — adding a language changes not one line of the core logic.
 
