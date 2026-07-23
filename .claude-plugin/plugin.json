@@ -2,7 +2,7 @@
   "name": "human-tone",
   "displayName": "Human Tone",
   "description": "Strip AI flavor from generated prose so it reads like a person wrote it — a proactive finishing pass on articles, marketing/social copy, slide decks, emails, and docs. Multilingual, with Chinese and English as first-class languages.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": { "name": "Seacen Zhao", "email": "xichangzhao@gmail.com" },
   "license": "MIT"
 }

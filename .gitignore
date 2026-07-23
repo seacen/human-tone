@@ -10,6 +10,11 @@ yarn-error.log*
 outputs/
 *.tmp
 
+# 打包产物(只作为 release 附件,不进仓库)
+dist/
+*.zip
+*.skill
+
 # 编辑器
 .vscode/
 .idea/

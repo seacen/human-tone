@@ -1,0 +1,25 @@
+{
+  "name": "human-tone",
+  "owner": {
+    "name": "Xichang (Seacen) Zhao",
+    "url": "https://github.com/seacen"
+  },
+  "description": "The human-tone marketplace — a skill that strips AI flavor from writing, in Chinese and English alike.",
+  "plugins": [
+    {
+      "name": "human-tone",
+      "source": "./",
+      "description": "Strip AI flavor from generated prose so it reads like a person wrote it — a proactive finishing pass on articles, marketing/social copy, slide decks, emails, and docs. Multilingual, with Chinese and English as first-class languages.",
+      "version": "1.0.1",
+      "homepage": "https://github.com/seacen/human-tone",
+      "license": "MIT",
+      "keywords": [
+        "writing",
+        "editing",
+        "ai-detection",
+        "chinese",
+        "prose"
+      ]
+    }
+  ]
+}

@@ -1,19 +1,17 @@
 ---
 name: human-tone
 description: >-
-  Strip the "AI flavor" from writing — the telltale patterns of machine-generated prose (evaluative
-  inflation, mechanical antithesis like "it's not just X, it's Y", rule-of-three padding, hollow
-  hedging, narrator scaffolding, jargon and corporate filler, translationese) — so the text reads
-  like a real person wrote it, without touching terms, quotes, code, numbers, or an author's
-  deliberate voice. Multilingual; Chinese and English are first-class.
-  Apply this proactively as the finishing pass on ANY task that produces prose a person will read or
-  publish: articles, blog posts, marketing and social copy (Xiaohongshu, WeChat public-account
-  posts), slide decks and PPT, emails, reports, documentation, announcements, product and landing
-  copy, newsletters, scripts. Run it before delivering generated writing even when the user never
-  mentions "AI flavor" — a reader should never be handed AI-sounding text, and cleaning it only after
-  they complain is already too late. Also use when explicitly asked to humanize, de-slop, remove the
-  AI tone, make text sound human, or fix writing that "reads like ChatGPT" or "is too robotic". Skip
-  only pure code, data, and mechanical transforms with no human-facing prose.
+  Strip AI flavor from writing — evaluative inflation, mechanical antithesis ("not just X, but Y"),
+  rule-of-three padding, hollow hedging, narrator scaffolding, corporate jargon, translationese — so
+  it reads like a person wrote it, without touching terms, quotes, code, numbers, or an author's
+  deliberate voice. Multilingual; Chinese and English are first-class. Use it proactively as the
+  finishing pass on any task producing prose people will read or publish: articles, blog posts,
+  marketing and social copy (Xiaohongshu, WeChat posts), slide decks and PPT, emails, reports,
+  documentation, announcements, product and landing copy, newsletters, scripts. Run it before
+  delivering generated writing even when the user never mentions AI flavor; cleaning up after they
+  complain is too late. Also use when asked to humanize, de-slop, remove the AI tone, make text sound
+  human, or fix writing that "reads like ChatGPT" or "is too robotic". Skip only pure code, data, and
+  mechanical transforms with no human-facing prose.
 ---
 
 # human-tone — strip the AI flavor

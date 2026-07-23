@@ -1,6 +1,6 @@
 {
   "name": "human-tone",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Strip AI flavor from writing, across agents — installer for the human-tone skill (npx skills add) + always-on rule references.",
   "type": "module",
   "bin": {

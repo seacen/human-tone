@@ -10,7 +10,7 @@
 
 **🌐 Language:** [**中文**](README.md) · **English (this page)**
 
-[![version](https://img.shields.io/badge/version-1.0.0-2ea44f)](https://github.com/seacen/human-tone/releases)
+[![version](https://img.shields.io/badge/version-1.0.1-2ea44f)](https://github.com/seacen/human-tone/releases)
 &nbsp;[![license](https://img.shields.io/github/license/seacen/human-tone?color=blue)](LICENSE)
 &nbsp;![works with](https://img.shields.io/badge/works_with-any_agent-8A2BE2)
 
@@ -51,6 +51,19 @@ It does two things: it installs the human-tone skill on each of your agents, the
 
 Just want the skill and will call it yourself? Run `npx skills add seacen/human-tone`, then invoke `human-tone` in your agent for a full deep clean.
 
+### As a Claude Code plugin
+
+Install it as a plugin and it updates along with the marketplace:
+
+```
+/plugin marketplace add seacen/human-tone
+/plugin install human-tone@human-tone
+```
+
+### Claude desktop / web
+
+Download `human-tone.zip` from [Releases](https://github.com/seacen/human-tone/releases) and upload it under Skills in Claude's settings.
+
 ## Install options
 
 Every touched file is backed up (`*.human-tone.bak`), reruns don't double-write, and it all reverses:
@@ -70,6 +83,7 @@ Needs Node (`npx` relies on it anyway; one script runs on both macOS and Windows
 ```
 skills/human-tone/   the skill: SKILL.md + references/ (universal layer + languages/ packs) + scripts/
 install.mjs          cross-agent installer
+.claude-plugin/      Claude Code plugin + marketplace manifests
 evals/               rubric, comparison design, test samples
 docs/DESIGN.md       design notes
 ```

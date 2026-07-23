@@ -10,7 +10,7 @@
 
 **🌐 Language:** **中文（本页）** · [**English**](README.en.md)
 
-[![version](https://img.shields.io/badge/version-1.0.0-2ea44f)](https://github.com/seacen/human-tone/releases)
+[![version](https://img.shields.io/badge/version-1.0.1-2ea44f)](https://github.com/seacen/human-tone/releases)
 &nbsp;[![license](https://img.shields.io/github/license/seacen/human-tone?color=blue)](LICENSE)
 &nbsp;![works with](https://img.shields.io/badge/works_with-any_agent-8A2BE2)
 
@@ -51,6 +51,19 @@ npx github:seacen/human-tone
 
 只想要 skill、自己需要时再调?装 `npx skills add seacen/human-tone`,然后在 agent 里点名调 `human-tone`,走一遍深度清洗。
 
+### Claude Code 插件
+
+也可以当插件装,跟着 marketplace 一起更新:
+
+```
+/plugin marketplace add seacen/human-tone
+/plugin install human-tone@human-tone
+```
+
+### Claude 桌面版 / 网页版
+
+到 [Releases](https://github.com/seacen/human-tone/releases) 下载 `human-tone.zip`,在 Claude 设置的 Skills 里上传。
+
 ## 安装选项
 
 改动过的文件都留一份 `.human-tone.bak` 备份,重复跑不会重复写,随时能撤:
@@ -70,6 +83,7 @@ npx github:seacen/human-tone --agents claude,codex # 只装指定的 agent
 ```
 skills/human-tone/   skill 本体:SKILL.md + references/(通用层 + languages/ 语言包)+ scripts/
 install.mjs          跨 agent 安装器
+.claude-plugin/      Claude Code 插件与 marketplace 清单
 evals/               评测:评分准则、对比设计、测试样本
 docs/DESIGN.md       设计说明
 ```
